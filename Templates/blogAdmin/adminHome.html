@@ -1,0 +1,56 @@
+{% extends 'blogAdmin/adminindex.html' %}
+
+{% load static %}
+
+{% block content %}
+
+	<section class="single-block-wrapper section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                    <div class="single-post">
+                        {% for blog in blogs %}
+                        <div class="post-header mb-5 text-center">
+                            <h2 class="post-title mt-2">
+                                {{ blog.title }}
+                            </h2>
+                            <div class="post-meta">
+                                <span class="text-uppercase font-sm letter-spacing-2 mr-3">by {{ blog.username }}</span>
+                            </div>
+                            <div class="post-featured-image mt-5">
+                                <img src="{{ blog.blog_image.url }}" class="img-fluid w-100" alt="featured-image">
+                            </div>
+                        </div>
+						<div class="post-body">
+                            <div class="entry-content">
+                                <p> {{ blog.description }}</p>
+							</div>
+						</div>
+                        <br />
+                                <a href="{% url 'addComments' blog.id %}" style="color:red;background-color:yellow;">🗨️ Add Comment</a>
+
+                        <div class="post-share">
+                            <div class="d-flex justify-content-center">
+                                <h3 class="post-title mt-2"><u>Blog Comments</u></h3>
+							</div>
+                            {% for ct in cmt %}
+                                {% if ct.title == blog.title %}
+                                        <div class="entry-content">
+                                            <h5><u>{{ ct.username }}: </u>
+                                                <q> {{ ct.comments }}</q>
+                                            </h5>
+                                        </div>
+                                {% endif %}
+                            {% endfor %}
+
+						</div>
+                        <hr>
+                        {% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+{% endblock %}

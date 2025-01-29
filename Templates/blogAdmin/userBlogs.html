@@ -1,0 +1,58 @@
+{% extends 'blogAdmin/adminindex.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+
+                        {% for blog in blogs %}
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    {% if blog.username == users.username %}
+
+                                    <article class="post-grid mb-5 ">
+                                        <img src="{{ blog.blog_image.url }}" alt="" class="img-fluid w-100">
+                                        <div class="post-content-grid">
+                                            <h3 class="post-title mt-1">{{ blog.title }}</h3>
+                                            <div class="cutoff-text">
+                                                <p class="cutoff-text">{{ blog.description }}</p>
+                                            </div>
+
+                                            {% if blog.status == 'True' %}
+                                                <a href="{% url 'blockBlogs' blog.id %}" class="btn btn-primary m-2">Block</a>
+                                            {% else %}
+                                                <a href="{% url 'unblockBlogs' blog.id %}" class="btn btn-primary m-2">Unblock</a>
+                                            {% endif %}
+                                          <a href="{% url 'delBlogs' blog.id %}" class="btn btn-danger m-2">Delete</a>
+                                        </div>
+                                    </article>
+                                    {% endif %}
+                                </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<style>
+
+.cutoff-text {
+    --max-lines: 3;
+
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--max-lines);
+}
+
+</style>
+
+
+
+{% endblock %}

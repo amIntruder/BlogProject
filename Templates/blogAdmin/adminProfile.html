@@ -1,0 +1,83 @@
+{% extends 'blogUser/userindex.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+    <section class="pt-5 padding-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-12" >
+                            <center><img src="{{ user.profile_picture }}" alt="" class="img-fluid w-25"></center>
+                        </div>
+                    </div>
+                    <hr style="border: 1px solid">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <form class=" row contact-form" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="col-6">
+                                    <label for="first_name" class="form-label" style="margin-bottom:0px;">First Name</label>
+                                    <input type="text" name="first_name" id="first_name" onchange="validateFName()" value="{{ user.first_name }}" required>
+                                    <div class="invalid-feedback">Please, enter first name!</div>
+                                </div>
+                                <div class="col-6">
+                                    <label for="last_name" class="form-label" style="margin-bottom:0px;">Last Name</label>
+                                    <input type="text" name="last_name" id="last_name" onchange="validateLName()" value="{{ user.last_name }}" required>
+                                    <div class="invalid-feedback">Please, enter last name!</div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="email" class="form-label" style="margin-bottom:0px;">Email</label>
+                                    <div class="input-group has-validation">
+                                        <input type="email" name="email" onchange="valEmail()" id="email" value="{{ user.email }}" required>
+                                        <div class="invalid-feedback">Please enter a valid Email address!</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                  <label for="profile_picture" class="form-label" style="margin-bottom:0px;">Profile Picture</label>
+                                    <input type="file" name="profile_picture" id="profile_picture"  >
+                                    <div class="invalid-feedback">Please enter a valid Profile picture!</div>
+                                    <br/> <a href="{{ user.profile_picture }}" style="font-size:12px;">profile pic: {{ user.profile_picture }}</a>
+                                </div>
+                                <div class="col-6">
+                                  <label for="contact_number" class="form-label" style="margin-bottom:0px;">Contact Number</label>
+                                  <div class="input-group has-validation"  onchange="con_number()">
+                                    <input type="text" name="contact_number" id="contact_number" value="{{ user.contact_number }}" required>
+                                    <div class="invalid-feedback">Please enter a valid Contact number!</div>
+                                  </div>
+                                </div>
+                                <div class="col-12" style="padding-top:30px;">
+                                    <input type="submit" class="btn btn-primary w-100" value="Update {{ user.username }} Profile">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<style>
+    input[type=text], input[type=email] {
+        border: 2px solid grey;
+        border-radius: 4px;
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+    input[type=file] {
+        border: 2px solid grey;
+        border-radius: 4px;
+        width: 100%;
+        padding: 10px 5px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+
+</style>
+
+{% endblock %}

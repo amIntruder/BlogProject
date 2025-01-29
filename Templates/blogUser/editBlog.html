@@ -1,0 +1,73 @@
+{% extends 'blogUser/userindex.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <section class="single-block-wrapper">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12 col-md-10 col-sm-12 col-xs-12">
+                    <div class="single-post">
+                        <div class="post-header mb-5 text-center">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-center">
+                                    <img src="{% static 'assets/img/my Blog.png' %}" style="width:200px;" alt="" class="img-fluid">
+                                </div>
+                                <h2 class="post-title mt-2"><u>Edit Blog</u></h2>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <form class="contact-form" method='POST' enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="col-12">
+                                            <label for="title" class="form-label" style="margin-bottom:0px;text-align:left;">Update Blog Title</label>
+                                            <input type="text" name="title" id="title" value="{{ blog.title }}" required>
+                                            <div class="invalid-feedback">Please, Enter Blog Title</div>
+                                        </div>
+                                        <div class="col-12">
+                                          <label for="blog_image" class="form-label" style="margin-bottom:0px;">Update Blog Image</label>
+                                            <input type="file" name="blog_image" id="blog_image" >
+                                            <br/> <a href="{{ blog.blog_image.url }}" style="font-size:12px;">Blog old Image: {{ blog.blog_image.url }}</a>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="description" class="form-label" style="margin-bottom:0px;"> Update Blog Description</label>
+                                            <textarea  name="description" id="description" rows="5" required>{{ blog.description }}</textarea>
+                                            <div class="invalid-feedback">Enter Description</div>
+                                        </div>
+                                        <br>
+                                        <input type="submit" class="btn btn-primary" value="Save Blog">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<style>
+    input[type=text], input[type=email] {
+        border: 2px solid grey;
+        border-radius: 4px;
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+    input[type=file], textarea {
+        border: 2px solid grey;
+        border-radius: 4px;
+        width: 100%;
+        padding: 10px 5px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+
+</style>
+
+
+
+{% endblock %}
