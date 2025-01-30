@@ -49,7 +49,7 @@ def signin(request):
                 messages.error(request,"Register user first..")
         except:
             messages.error(request,"Invalid User Name or Password!..")
-    return render(request,'Accounts/signin.html')
+    return render(request,'Accounts/Signin.html')
 
 
 def logout_view(request):
@@ -104,7 +104,7 @@ def signup(request):
             messages.info(request, "Password not matching")
             return redirect('signup')
 
-    return render(request,'Accounts/signup.html')
+    return render(request,'Accounts/Signup.html')
 
 
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
